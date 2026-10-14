@@ -1,0 +1,71 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build-and-test:
+    name: build + tests (${{ matrix.cc }})
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        cc: [gcc, clang]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure
+        run: cmake -B build -DCMAKE_C_COMPILER=${{ matrix.cc }}
+      - name: Build
+        run: cmake --build build -j "$(nproc)"
+      - name: Test
+        run: ctest --test-dir build --output-on-failure
+
+  make:
+    name: plain Makefile build
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: make -j "$(nproc)"
+      - run: make test
+
+  sanitizers:
+    name: AddressSanitizer + UBSan
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: cmake -B build -DLINUXLAB_SANITIZE=ON -DCMAKE_BUILD_TYPE=Debug
+      - run: cmake --build build -j "$(nproc)"
+      - run: ctest --test-dir build --output-on-failure
+
+  valgrind:
+    name: Valgrind (memcheck)
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update && sudo apt-get install -y valgrind
+      - run: make -j "$(nproc)"
+      - name: Parser unit tests under memcheck
+        run: valgrind --error-exitcode=1 --leak-check=full --errors-for-leak-kinds=definite build/bin/test_parser
+      - name: Shell under memcheck
+        run: |
+          valgrind --error-exitcode=1 --leak-check=full --errors-for-leak-kinds=definite \
+            build/bin/lsh -c 'echo a | cat > /tmp/v.txt; cd /; pwd; export X=1; false || echo "$X $?"'
+
+  static-analysis:
+    name: static analysis + formatting
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update && sudo apt-get install -y clang-tidy clang-format cppcheck
+      - name: cppcheck
+        run: |
+          cppcheck --error-exitcode=1 --enable=warning,performance,portability \
+            --inline-suppr --suppress=missingIncludeSystem --suppress=normalCheckLevelMaxBranches -D_GNU_SOURCE -I common \
+            shell/src common tools labs benchmarks
+      - name: clang-tidy
+        run: |
+          cmake -B build -DCMAKE_C_COMPILER=clang
+          clang-tidy -p build --quiet shell/src/*.c common/*.c tools/*.c
+      - name: clang-format
+        run: clang-format --dry-run --Werror $(git ls-files '*.c' '*.h')

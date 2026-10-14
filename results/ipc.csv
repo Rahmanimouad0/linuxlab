@@ -1,0 +1,14 @@
+benchmark,variant,parameter,value,unit
+ipc_latency,pipe,64B,53.7488,us
+ipc_latency,unix socket,64B,76.8123,us
+ipc_latency,shm+semaphore,64B,41.7530,us
+ipc_latency,shm+spin,64B,0.0764,us
+ipc_throughput,pipe,4KiB,3344.1167,MiB/s
+ipc_throughput,unix socket,4KiB,1678.3066,MiB/s
+ipc_throughput,shm double buffer,4KiB,195.9653,MiB/s
+ipc_throughput,pipe,64KiB,2609.1645,MiB/s
+ipc_throughput,unix socket,64KiB,4369.2900,MiB/s
+ipc_throughput,shm double buffer,64KiB,1735.2438,MiB/s
+ipc_throughput,pipe,1MiB,820.4044,MiB/s
+ipc_throughput,unix socket,1MiB,4686.1407,MiB/s
+ipc_throughput,shm double buffer,1MiB,12975.2453,MiB/s

@@ -1,0 +1,8 @@
+date:      2026-09-23T08:53:24Z
+kernel:    Linux 6.18.33.2-microsoft-standard-WSL2 x86_64
+cpu:       AMD Ryzen 7 255 w/ Radeon 780M Graphics
+cpus:      16 online
+memory:    15.3 GiB
+compiler:  cc (Ubuntu 15.2.0-16ubuntu1) 15.2.0
+file dir:  results (ext4)
+note:      WSL2 - Linux runs in a Hyper-V virtual machine

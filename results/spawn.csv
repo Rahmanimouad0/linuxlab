@@ -1,0 +1,13 @@
+benchmark,variant,parameter,value,unit
+spawn,fork+_exit,parent=0MB,322.7125,us
+spawn,fork+exec,parent=0MB,952.6559,us
+spawn,vfork+exec,parent=0MB,777.1548,us
+spawn,posix_spawn,parent=0MB,765.3225,us
+spawn,fork+_exit,parent=64MB,2729.4687,us
+spawn,fork+exec,parent=64MB,3227.2780,us
+spawn,vfork+exec,parent=64MB,773.8066,us
+spawn,posix_spawn,parent=64MB,738.2791,us
+spawn,fork+_exit,parent=256MB,7924.8795,us
+spawn,fork+exec,parent=256MB,8581.7811,us
+spawn,vfork+exec,parent=256MB,821.4377,us
+spawn,posix_spawn,parent=256MB,815.3238,us

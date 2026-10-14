@@ -1,0 +1,25 @@
+benchmark,variant,parameter,value,unit
+sync,mutex,threads=1,188.6028,Mops/s
+sync,mutex,threads=2,73.0788,Mops/s
+sync,mutex,threads=4,61.3925,Mops/s
+sync,mutex,threads=8,48.0938,Mops/s
+sync,spinlock,threads=1,216.0228,Mops/s
+sync,spinlock,threads=2,51.8177,Mops/s
+sync,spinlock,threads=4,52.9470,Mops/s
+sync,spinlock,threads=8,22.2993,Mops/s
+sync,atomic,threads=1,545.8588,Mops/s
+sync,atomic,threads=2,225.7811,Mops/s
+sync,atomic,threads=4,193.6761,Mops/s
+sync,atomic,threads=8,165.4481,Mops/s
+sync,false sharing,threads=1,4290.3838,Mops/s
+sync,false sharing,threads=2,2198.1757,Mops/s
+sync,false sharing,threads=4,1970.5447,Mops/s
+sync,false sharing,threads=8,1580.9124,Mops/s
+sync,padded,threads=1,3961.4503,Mops/s
+sync,padded,threads=2,8453.3126,Mops/s
+sync,padded,threads=4,15243.1147,Mops/s
+sync,padded,threads=8,15455.9290,Mops/s
+sync,local,threads=1,3940.9951,Mops/s
+sync,local,threads=2,7930.8368,Mops/s
+sync,local,threads=4,14217.9222,Mops/s
+sync,local,threads=8,20650.0960,Mops/s

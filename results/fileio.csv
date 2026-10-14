@@ -1,0 +1,6 @@
+benchmark,variant,parameter,value,unit
+fileio,read 4KiB,file=512MiB,3392.6392,MiB/s
+fileio,read 64KiB,file=512MiB,8438.6789,MiB/s
+fileio,read 1MiB,file=512MiB,12272.1670,MiB/s
+fileio,mmap,file=512MiB,23935.1455,MiB/s
+fileio,mmap+MAP_POPULATE,file=512MiB,12497.5066,MiB/s

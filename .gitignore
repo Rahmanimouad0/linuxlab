@@ -1,0 +1,9 @@
+build/
+build-*/
+*.o
+*.d
+compile_commands.json
+.cache/
+results/*.dat
+linuxlab-bench-*.dat
+__pycache__/
