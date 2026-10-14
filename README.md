@@ -29,6 +29,18 @@ lsh: nosuchcmd: command not found
 *(a real session, recorded on a pseudo-terminal; `cd` inside a pipeline runs in a child process,
 so the shell's own directory does not change)*
 
+## Screenshots
+
+| job control in lsh | process tree (`llps -f`) |
+|---|---|
+| ![lsh job control](docs/screenshots/shell.png) | ![llps tree](docs/screenshots/llps-tree.png) |
+
+| live CPU view (`llps -t`) | data race lab |
+|---|---|
+| ![llps top](docs/screenshots/llps-top.png) | ![race lab](docs/screenshots/race-lab.png) |
+
+![all 155 tests passing](docs/screenshots/tests.png)
+
 ## What's inside
 
 **MiniShell (`lsh`)**, about 2,000 lines of C, no dependencies:
